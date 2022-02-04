@@ -7,3 +7,7 @@
   color: white;
   text-decoration: none;
 }
+
+.active a {
+  color: red;
+}

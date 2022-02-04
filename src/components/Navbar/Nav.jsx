@@ -4,7 +4,7 @@ import classes from './Nav.module.css';
 const Nav = () => {
   return (
     <nav className={classes.nav}>
-        <div>
+        <div className={`${classes.nav} ${classes.active}`}>
           <a href='#'>Profile</a>
         </div>
         <div>

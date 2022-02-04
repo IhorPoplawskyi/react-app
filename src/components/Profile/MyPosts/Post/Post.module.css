@@ -1,0 +1,12 @@
+.avatar {
+  width: 50px;
+}
+
+.avatar img {
+  max-width: 100%;
+}
+
+.text {
+  color: coral;
+  font-size: 21px;
+}
