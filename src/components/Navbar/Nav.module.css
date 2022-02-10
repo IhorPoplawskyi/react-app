@@ -3,11 +3,12 @@
   background-color: burlywood;
 }
 
-.nav a {
+.inactive {
   color: white;
   text-decoration: none;
 }
 
-.active a {
-  color: red;
+.active {
+  color: brown;
+  text-decoration: none;
 }
