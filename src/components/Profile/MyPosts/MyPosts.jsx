@@ -9,6 +9,10 @@ const MyPosts = () => {
     {id: 3, text: 'Im learning React'},
   ]
 
+  const array = postData.map(el => {
+    return <Post text={el.text} />
+  })
+
   return (
     <div className={classes.postsBlock}>
       <h3>My Posts</h3>
@@ -19,9 +23,7 @@ const MyPosts = () => {
         <button>Add post</button>
       </div>
       <div className={classes.posts}>
-        <Post text={postData[0].text} />
-        <Post text={postData[1].text} />
-        <Post text={postData[2].text} />
+        {array}
       </div>
     </div>
   );
