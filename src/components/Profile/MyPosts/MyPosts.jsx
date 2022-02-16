@@ -2,15 +2,10 @@ import React from "react";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
-const MyPosts = () => {
-  const postData = [
-    {id: 1, text: 'Hello world'},
-    {id: 2, text: 'Hello JavaScript'},
-    {id: 3, text: 'Im learning React'},
-  ]
-
-  const array = postData.map(el => {
-    return <Post text={el.text} />
+const MyPosts = (props) => {
+  
+  const posts = props.posts.map(post => {
+    return <Post text={post.text} />
   })
 
   return (
@@ -23,7 +18,7 @@ const MyPosts = () => {
         <button>Add post</button>
       </div>
       <div className={classes.posts}>
-        {array}
+        {posts}
       </div>
     </div>
   );
