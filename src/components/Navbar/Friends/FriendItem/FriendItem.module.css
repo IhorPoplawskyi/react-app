@@ -1,0 +1,16 @@
+.friendsNav {
+  margin: 7px;
+}
+
+.friendsNavAvatar {
+  max-width: 50px;
+}
+
+.friendsNavName {
+  display: flex;
+  justify-content: center;
+}
+
+.friendsNavAvatar img {
+  max-width: 100%;
+}

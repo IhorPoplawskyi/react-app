@@ -10,15 +10,16 @@ import News from "./components/News/News";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App(props) {
+  const {state: {profilePage, messagesPage, sitebar}} = props;
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
-        <Nav />
+        <Nav friends={sitebar.friends}/>
         <div className="app-wrapper-content">
           <Routes>
-            <Route path="/profile/*" element={<Profile posts={props.posts}/>}></Route>
-            <Route path="/dialogs/*" element={<Dialogs dialogs={props.dialogs} messages={props.messages}/>}></Route>
+            <Route path="/profile/*" element={<Profile posts={profilePage.posts}/>}></Route>
+            <Route path="/dialogs/*" element={<Dialogs dialogs={messagesPage.dialogs} messages={messagesPage.messages}/>}></Route>
             <Route path="/news/*" element={<News />}></Route>
             <Route path="/music/*" element={<Music />}></Route>
             <Route path="/settings/*" element={<Settings/>}></Route>

@@ -1,6 +1,7 @@
 .nav {
   grid-area: n;
-  background-color: burlywood;
+  background-color: rgb(72, 146, 189);
+  padding: 10px;
 }
 
 .inactive {
@@ -9,6 +10,19 @@
 }
 
 .active {
-  color: brown;
+  color: rgb(228, 131, 4);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.activeFriends {
+  font-size: 40px;
+  color: rgb(228, 131, 4);
+  text-decoration: none;
+}
+
+.inactiveFriends {
+  font-size: 40px;
+  color: white;
   text-decoration: none;
 }
