@@ -7,6 +7,7 @@ const state = {
       { id: 2, text: "Hello JavaScript" },
       { id: 3, text: "Im learning React" },
     ],
+    newPostText: '',
   },
   messagesPage: {
     dialogs: [
@@ -35,16 +36,23 @@ const state = {
   }
 };
 
-export const addPost = (postMessage) => {
+export const addPost = () => {
   let newPost = {
     id: `${Math.random()}`,
-    text: postMessage,
+    text: state.profilePage.newPostText,
     likesCount: 0,
   };
 
   state.profilePage.posts.push(newPost);
-
+  updateNewPostText('');
   rerenderEntireTree(state);
 }
+
+export const updateNewPostText = (newText) => {
+  state.profilePage.newPostText = newText;
+  rerenderEntireTree(state);
+}
+
+window.state = state;
 
 export default state;
