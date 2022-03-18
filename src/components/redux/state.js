@@ -69,7 +69,7 @@ let store = {
       };
     
       this._state.profilePage.posts.push(newPost);
-      this.updateNewPostText('');
+      this._state.profilePage.newPostText = '';
       this._callSubscriber(this._state);
     } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
       this._state.profilePage.newPostText = action.newText;
