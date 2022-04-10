@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
 let store = {
   _state: {
     profilePage: {
@@ -35,16 +38,14 @@ let store = {
     }
   },
   _callSubscriber() {
-    console.log('state chaged')
+    console.log('abobus');
   },
-  
   getState() {
     return this._state;
   },
-  subscribe (observer) {
+  subscribe(observer) {
     this._callSubscriber = observer;
   },
-
   addPost() {
     let newPost = {
       id: `${Math.random()}`,
@@ -53,7 +54,7 @@ let store = {
     };
   
     this._state.profilePage.posts.push(newPost);
-    this.updateNewPostText('');
+    this._state.profilePage.newPostText = '';
     this._callSubscriber(this._state);
   },
   updateNewPostText(newText) {
@@ -61,7 +62,7 @@ let store = {
     this._callSubscriber(this._state);
   },
   dispatch(action) {
-    if (action.type = 'ADD-POST') {
+    if (action.type === 'ADD-POST') {
       let newPost = {
         id: `${Math.random()}`,
         text: this._state.profilePage.newPostText,
@@ -78,6 +79,14 @@ let store = {
   },
 }
 
-window.state = store._state;
+export const addPostActionCreator = () => {
+  return {type: ADD_POST}
+}
+
+export const updateNewPostText = (text) => {
+  return {type: UPDATE_NEW_POST_TEXT, newText: text}
+}
+
+window.store = store;
 
 export default store;
