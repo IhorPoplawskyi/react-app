@@ -10,7 +10,7 @@ import News from "./components/News/News";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App(props) {
-  const {state: {profilePage, messagesPage, sitebar}} = props;
+  const {state: {profilePage, dialogsPage, sitebar}} = props;
   return (
     <BrowserRouter>
       <div className="app-wrapper">
