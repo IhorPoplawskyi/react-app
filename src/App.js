@@ -14,7 +14,7 @@ function App(props) {
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
-        <Nav friends={props.state.sitebar.friends}/>
+        <Nav friends={props.state.friends}/>
         <div className="app-wrapper-content">
           <Routes>
             <Route path="/profile/*" element={<Profile/>}></Route>
