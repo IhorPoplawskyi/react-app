@@ -23,13 +23,20 @@ const initState = {
 
 const dialogsReducer = (state = initState, action) => {
   if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-    state.newMessageBody = action.body;
+    return {
+      ...state,
+      newMessageBody: action.body
+    }
   } else if (action.type === SEND_MESSAGE) {
     let body = state.newMessageBody;
-    state.newMessageBody = "";
-    state.messages.push({ id: 6, message: body });
+    return {
+      ...state,
+      newMessageBody: '',
+      messages: [...state.messages, {id: Math.random(), message: body}]
+    }
+  } else {
+    return state;
   }
-  return state;
 };
 
 export const sendMessageCreator = () => {

@@ -4,7 +4,7 @@ import classes from './Friends.module.css'
 
 const Friends = (props) => {
   const friendElement = props.friends.map(friend => {
-    return <FriendItem name={friend.name}/>
+    return <FriendItem name={friend.name} key={friend.id}/>
   });
 
   return (
