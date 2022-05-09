@@ -25,10 +25,12 @@ const Nav = (props) => {
           <NavLink to='/settings' className={setActive}>Settings</NavLink>
         </div>
         <div>
+          <NavLink to='/users' className={setActive}>Users</NavLink>
+        </div>
+        <div>
           <NavLink to='/friends' className={setActiveFriends}>Friends</NavLink>
           <Friends friends={props.friends}/>
         </div>
-
       </nav>
   )
 }
