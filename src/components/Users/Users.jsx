@@ -1,21 +1,17 @@
+import axios from "axios";
 import React from "react";
 import classes from './Users.module.css';
 
 const Users = (props) => {
     if (props.users.length === 0) {
-        props.setUsers([
-        {id: 1, imgUrl: 'https://img.icons8.com/glyph-neue/2x/happy.png', firstName: 'Ihor', lastName: 'Poplawskyi', status: 'in work', location: 'Ukraine, Zhytomyr', followed: true},
-        {id: 2, imgUrl: 'https://img.icons8.com/glyph-neue/2x/happy.png', firstName: 'Vova', lastName: 'Poplawskyi', status: 'surfing', location: 'Norway, Oslo', followed: true},
-        {id: 3, imgUrl: 'https://img.icons8.com/glyph-neue/2x/happy.png', firstName: 'Jack', lastName: 'Smith', status: 'chilling', location: 'LA, USA', followed: false},
-        {id: 4, imgUrl: 'https://img.icons8.com/glyph-neue/2x/happy.png', firstName: 'Sketch', lastName: 'Turner', status: 'in comix', location: 'NY, USA', followed: false},
-    ])
+        axios.get('https://jsonplaceholder.typicode.com/users').then(response => props.setUsers(response.data))
     }
     return (
         <div>
             {props.users.map(user => <div key={user.id}>
                 <span>
                     <div>
-                        <img className={classes.userPhoto} src={user.imgUrl}></img>
+                        <img className={classes.userPhoto} src={user.imgUrl || 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png'}></img>
                     </div>
                     <div>
                         {user.followed ? 
@@ -25,7 +21,7 @@ const Users = (props) => {
                 </span>
                 <span>
                     <span>
-                        <div>{user.firstName} {user.lastName}</div>
+                        <div>{user.name} {user.lastName}</div>
                         <div>{user.status}</div>
                     </span>
                     <span>

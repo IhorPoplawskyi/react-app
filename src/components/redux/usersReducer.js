@@ -28,7 +28,7 @@ const usersReducer = (state = initState, action) => {
             })
         }
     } else if (action.type === SET_USERS) {
-        return {...state, users: [...state.users, ...action.users] }
+        return {...state, users: [...state.users, ...action.users]}
     } else {
         return state
     }
