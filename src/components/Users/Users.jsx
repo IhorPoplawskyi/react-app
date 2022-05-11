@@ -2,21 +2,22 @@ import axios from "axios";
 import React from "react";
 import classes from './Users.module.css';
 
-const Users = (props) => {
-    if (props.users.length === 0) {
-        axios.get('https://jsonplaceholder.typicode.com/users').then(response => props.setUsers(response.data))
+class Users extends React.Component {
+    constructor(props) {
+        super(props);
+        axios.get('https://jsonplaceholder.typicode.com/users').then(response => this.props.setUsers(response.data));
     }
-    return (
+    render = () => (
         <div>
-            {props.users.map(user => <div key={user.id}>
+            {this.props.users.map(user => <div key={user.id}>
                 <span>
                     <div>
                         <img className={classes.userPhoto} src={user.imgUrl || 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png'}></img>
                     </div>
                     <div>
                         {user.followed ? 
-                        <button onClick={() => {props.unfollow(user.id)}}>Unfollow</button> : 
-                        <button onClick={() => {props.follow(user.id)}}>Follow</button>}
+                        <button onClick={() => {this.props.unfollow(user.id)}}>Unfollow</button> : 
+                        <button onClick={() => {this.props.follow(user.id)}}>Follow</button>}
                     </div>
                 </span>
                 <span>
