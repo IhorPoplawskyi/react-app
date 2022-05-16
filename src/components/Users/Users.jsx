@@ -3,9 +3,10 @@ import React from "react";
 import classes from './Users.module.css';
 
 class Users extends React.Component {
-    constructor(props) {
-        super(props);
-        axios.get('https://jsonplaceholder.typicode.com/users').then(response => this.props.setUsers(response.data));
+    componentDidMount() {
+        if (this.props.users.length === 0) {
+            axios.get('https://jsonplaceholder.typicode.com/users').then(response => this.props.setUsers(response.data));
+        }
     }
     render = () => (
         <div>
