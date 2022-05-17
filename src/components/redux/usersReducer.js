@@ -1,9 +1,13 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 
 const initState = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 21,
+    currentPage: 3,
 }
 
 const usersReducer = (state = initState, action) => {
@@ -29,6 +33,9 @@ const usersReducer = (state = initState, action) => {
         }
     } else if (action.type === SET_USERS) {
         return {...state, users: [...state.users, ...action.users]}
+        //тут мало би бути return {...state, users: [...action.users]}
+    } else if ((action.type === SET_CURRENT_PAGE)) {
+        return {...state, currentPage: action.currentPage}
     } else {
         return state
     }
@@ -37,5 +44,6 @@ const usersReducer = (state = initState, action) => {
 export const followAC = (userId) => {return {type: FOLLOW, userId}};
 export const unfollowAC = (userId) => {return {type: UNFOLLOW, userId}};
 export const setUsersAC = (users) => {return {type: SET_USERS, users}};
+export const setCurrentPageAC = (currentPage) => {return {type: SET_CURRENT_PAGE, currentPage}};
 
 export default usersReducer;
