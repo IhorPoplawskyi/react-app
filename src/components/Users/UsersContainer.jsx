@@ -2,13 +2,16 @@ import React from "react";
 import Users from "./Users";
 import axios from "axios";
 import { connect } from "react-redux";
-import {followAC, unfollowAC, setUsersAC, setCurrentPageAC} from './../redux/usersReducer'
+import {followAC, unfollowAC, setUsersAC, setCurrentPageAC, setIsFetchingAC} from './../redux/usersReducer';
+import Preloader from "../common/Preloader/Preloader";
 
 class UsersAPIComponent extends React.Component {
   componentDidMount() {
       if (this.props.users.length === 0) {
-          axios.get('https://jsonplaceholder.typicode.com/users').then(response => this.props.setUsers(response.data));
-          debugger
+        this.props.toogleIsFetching(true);
+        axios.get('https://jsonplaceholder.typicode.com/users').then(response => {
+          this.props.toogleIsFetching(false);  
+          this.props.setUsers(response.data)});
       }
   }
   onPageChanged = (pageNumber) => {
@@ -20,7 +23,9 @@ class UsersAPIComponent extends React.Component {
       //так само на потрібно буде отримувати інфу від сервера про кількість юзерів і через редюсер, екшкріейтор передавати в стейт
   }
   render = () => {
-    return <Users 
+    return <> 
+    {this.props.isFetching ? <Preloader/> : null}
+    <Users 
     users={this.props.users} 
     totalUsersCount={this.props.totalUsersCount} 
     pageSize={this.props.pageSize} 
@@ -28,7 +33,7 @@ class UsersAPIComponent extends React.Component {
     unfollow={this.props.unfollow} 
     follow={this.props.follow} 
     onPageChanged={this.onPageChanged}
-    />}
+    /> </>}
 
 }
 
@@ -38,6 +43,7 @@ const mapStateToProps = (state) => {
       pageSize: state.usersPage.pageSize,
       totalUsersCount: state.usersPage.totalUsersCount,
       currentPage: state.usersPage.currentPage,
+      isFetching: state.usersPage.isFetching,
     }
   }
   
@@ -46,7 +52,8 @@ const mapStateToProps = (state) => {
       follow: (userId) => {dispatch(followAC(userId))},
       unfollow: (userId) => {dispatch(unfollowAC(userId))},
       setUsers: (users) => {dispatch(setUsersAC(users))},
-      setCurrentPageAC: (page) => {dispatch(setCurrentPageAC(page))}
+      setCurrentPageAC: (page) => {dispatch(setCurrentPageAC(page))},
+      toogleIsFetching: (isFetching) => {dispatch(setIsFetchingAC(isFetching))}
     }
   }
   

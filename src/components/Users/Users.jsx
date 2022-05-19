@@ -11,7 +11,7 @@ let Users = (props) => {
         <div>
             <div>
                 {pages.map(el => {
-                    return <span className={props.currentPage === el && classes.selectedPage} 
+                    return <span key={el} className={props.currentPage === el ? classes.selectedPage : undefined} 
                     onClick={() => {props.onPageChanged(el)}}>{el}</span>}
                 )}
             </div>
@@ -28,7 +28,7 @@ let Users = (props) => {
                 </span>
                 <span>
                     <span>
-                        <div>{user.name} {user.lastName}</div>
+                        <div>{user.name} {user.username}</div>
                         <div>{user.status}</div>
                     </span>
                     <span>
