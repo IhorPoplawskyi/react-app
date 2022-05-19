@@ -47,16 +47,12 @@ const mapStateToProps = (state) => {
     }
   }
   
-  const mapDispatchToProps = (dispatch) => {
-    return {
-      follow: (userId) => {dispatch(followAC(userId))},
-      unfollow: (userId) => {dispatch(unfollowAC(userId))},
-      setUsers: (users) => {dispatch(setUsersAC(users))},
-      setCurrentPageAC: (page) => {dispatch(setCurrentPageAC(page))},
-      toogleIsFetching: (isFetching) => {dispatch(setIsFetchingAC(isFetching))}
-    }
-  }
-  
-  const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
+  const UsersContainer = connect(mapStateToProps, {
+    follow: followAC, 
+    unfollow: unfollowAC,
+    setUsers: setUsersAC,
+    setCurrentPageAC: setCurrentPageAC,
+    toogleIsFetching: setIsFetchingAC,
+  })(UsersAPIComponent);
   
   export default UsersContainer;
