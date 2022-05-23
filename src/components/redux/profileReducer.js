@@ -1,5 +1,6 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 const initState = {
   posts: [
@@ -8,6 +9,7 @@ const initState = {
     { id: 3, text: "Im learning React" },
   ],
   newPostText: "",
+  profile: null,
 };
 
 const profileReducer = (state = initState, action) => {
@@ -27,6 +29,11 @@ const profileReducer = (state = initState, action) => {
       ...state,
       newPostText: action.newText,
     }
+  } else if (action.type === SET_USER_PROFILE) {
+    return {
+      ...state,
+      profile: action.profile
+    }
   } else {
     return state;
   }
@@ -37,6 +44,10 @@ export const addPostActionCreator = () => {
 };
 export const updateNewPostTextActionCreator = (text) => {
   return { type: UPDATE_NEW_POST_TEXT, newText: text };
+};
+
+export const setUserProfile = (profile) => {
+  return {type: SET_USER_PROFILE, profile};
 };
 
 export default profileReducer;

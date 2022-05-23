@@ -7,20 +7,19 @@ import Preloader from "../common/Preloader/Preloader";
 
 class UsersAPIComponent extends React.Component {
   componentDidMount() {
+    console.log(this.props)
       if (this.props.users.length === 0) {
         this.props.toogleIsFetching(true);
-        axios.get('https://jsonplaceholder.typicode.com/users').then(response => {
+        axios.get(`https://reqres.in/api/users?page=${this.props.currentPage}`).then(response => {
           this.props.toogleIsFetching(false);  
-          this.props.setUsers(response.data)});
+          this.props.setUsers(response.data.data)});
       }
   }
   onPageChanged = (pageNumber) => {
-      this.props.setCurrentPageAC(pageNumber);
-      //axios.get('https://jsonplaceholder.typicode.com/users?page=${pageNumber}').then(response => this.props.setUsers(response.data));
-      //тут я записав в строці запиту pageNumber, щоб отримувати саме ту потрібну нам сторінку, але у нас сервер не підтримує
-      //такого запиту, тому він не працює. так само вказувати номер потрібно і в componentDidMount і брати його з
-      //this.props.currentPage  + потрібно буде змінити в state при отриманні юзерів перезаписування нових старих юзерів на нових
-      //так само на потрібно буде отримувати інфу від сервера про кількість юзерів і через редюсер, екшкріейтор передавати в стейт
+    this.props.setCurrentPageAC(pageNumber);
+    axios.get(`https://reqres.in/api/users?page=${pageNumber}`).then(response => {
+      this.props.toogleIsFetching(false);  
+      this.props.setUsers(response.data.data)});
   }
   render = () => {
     return <> 

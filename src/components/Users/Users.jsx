@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import classes from './Users.module.css';
 
 let Users = (props) => {
@@ -7,6 +8,7 @@ let Users = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
+    const defaultPhoto = 'https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png';
     return (
         <div>
             <div>
@@ -18,7 +20,9 @@ let Users = (props) => {
             {props.users.map(user => <div key={user.id}> 
                 <span>
                     <div>
-                        <img className={classes.userPhoto} src={user.imgUrl || 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png'}></img>
+                    <NavLink to={'/profile'}>
+                        <img className={classes.userPhoto} src={user.avatar || defaultPhoto}></img>
+                    </NavLink>
                     </div>
                     <div>
                         {user.followed ? 
@@ -28,11 +32,7 @@ let Users = (props) => {
                 </span>
                 <span>
                     <span>
-                        <div>{user.name} {user.username}</div>
-                        <div>{user.status}</div>
-                    </span>
-                    <span>
-                        <div>{user.location}</div>
+                        <div>{user.first_name} {user.last_name}</div>
                     </span>
                  </span>
             </div>)}

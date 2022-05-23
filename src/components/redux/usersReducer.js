@@ -6,8 +6,8 @@ const TOOGLE_ISFETCHING = 'TOOGLE_ISFETCHING';
 
 const initState = {
     users: [],
-    pageSize: 5,
-    totalUsersCount: 21,
+    pageSize: 6,
+    totalUsersCount: 12,
     currentPage: 1,
     isFetching: true,
 }
@@ -34,8 +34,7 @@ const usersReducer = (state = initState, action) => {
             })
         }
     } else if (action.type === SET_USERS) {
-        return {...state, users: [...state.users, ...action.users]}
-        //тут мало би бути return {...state, users: [...action.users]}
+        return {...state, users: [...action.users]}
     } else if ((action.type === SET_CURRENT_PAGE)) {
         return {...state, currentPage: action.currentPage}
     } else if (action.type === TOOGLE_ISFETCHING) {
