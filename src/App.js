@@ -18,10 +18,10 @@ function App(props) {
         <Nav friends={props.state.friends}/>
         <div className="app-wrapper-content">
           <Routes>
-            <Route path="/profile/*" element={<ProfileContainer/>}></Route>
+            <Route path="/profile/:user" element={<ProfileContainer/>}></Route>
             <Route path="/dialogs/*" element={<DialogsContainer/>}></Route>
-            <Route path="/news/*" element={<News />}></Route>
-            <Route path="/music/*" element={<Music />}></Route>
+            <Route path="/news/*" element={<News/>}></Route>
+            <Route path="/music/*" element={<Music/>}></Route>
             <Route path="/settings/*" element={<Settings/>}></Route>
             <Route path='/users/*' element={<UsersContainer/>}></Route>
           </Routes>
