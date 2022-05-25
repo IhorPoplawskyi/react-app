@@ -4,27 +4,26 @@ import axios from "axios";
 import { connect } from "react-redux";
 import {followAC, unfollowAC, setUsersAC, setCurrentPageAC, setIsFetchingAC} from './../redux/usersReducer';
 import Preloader from "../common/Preloader/Preloader";
+import {getUsers} from './../../api/api'
 
 class UsersAPIComponent extends React.Component {
   componentDidMount() {
     if (this.props.users.length === 0) {
       this.props.toogleIsFetching(true);
-      axios
-        .get(`https://reqres.in/api/users?page=${this.props.currentPage}`)
+      getUsers(this.props.currentPage)
         .then((response) => {
-          this.props.toogleIsFetching(false);
-          this.props.setUsers(response.data.data);
-        });
+        this.props.toogleIsFetching(false);
+        this.props.setUsers(response.data);
+      });
     }
   }
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPageAC(pageNumber);
-    axios
-      .get(`https://reqres.in/api/users?page=${pageNumber}`)
+    getUsers(pageNumber)
       .then((response) => {
-        this.props.toogleIsFetching(false);
-        this.props.setUsers(response.data.data);
-      });
+      this.props.toogleIsFetching(false);
+      this.props.setUsers(response.data);
+    });
   };
   render = () => {
     return (
