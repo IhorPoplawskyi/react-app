@@ -1,3 +1,4 @@
+import { userAPI } from "../../api/api";
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -47,10 +48,20 @@ const usersReducer = (state = initState, action) => {
     }
 }
 
-export const followAC = (userId) => {return {type: FOLLOW, userId}};
-export const unfollowAC = (userId) => {return {type: UNFOLLOW, userId}};
-export const setUsersAC = (users) => {return {type: SET_USERS, users}};
-export const setCurrentPageAC = (currentPage) => {return {type: SET_CURRENT_PAGE, currentPage}};
-export const setIsFetchingAC = (isFetching) => {return {type: TOOGLE_ISFETCHING, isFetching}};
+export const getUsers = (currentPage) => {
+    return (dispatch) => {
+      dispatch(toogleIsFetching(true));
+      userAPI(currentPage).then((response) => {
+        dispatch(toogleIsFetching(false));
+        dispatch(setUsers(response.data));
+      });
+    };
+}
+
+export const follow = (userId) => {return {type: FOLLOW, userId}};
+export const unfollow = (userId) => {return {type: UNFOLLOW, userId}};
+export const setUsers = (users) => {return {type: SET_USERS, users}};
+export const setCurrentPage = (currentPage) => {return {type: SET_CURRENT_PAGE, currentPage}};
+export const toogleIsFetching = (isFetching) => {return {type: TOOGLE_ISFETCHING, isFetching}};
 
 export default usersReducer;
