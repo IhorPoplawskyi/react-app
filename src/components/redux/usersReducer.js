@@ -51,7 +51,7 @@ const usersReducer = (state = initState, action) => {
 export const getUsers = (currentPage) => {
     return (dispatch) => {
       dispatch(toogleIsFetching(true));
-      userAPI(currentPage).then((response) => {
+      userAPI.getUsers(currentPage).then((response) => {
         dispatch(toogleIsFetching(false));
         dispatch(setUsers(response.data));
       });

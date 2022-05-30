@@ -1,17 +1,17 @@
 import React from "react";
 import Profile from "./Profile";
-import axios from "axios";
-import { connect } from "react-redux";
 import { setUserProfile } from "../redux/profileReducer";
+import { userAPI } from "../../api/api";
+import { connect } from "react-redux";
 import {useLocation,useNavigate,useParams} from "react-router-dom";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
     let user = this.props.router.params.user;
     if (!user) {user = 2};
-    axios.get(`https://reqres.in/api/users/${user}`).then((response) => {
-      this.props.setUserProfile(response.data);
-    });
+    userAPI.getProfile(user).then(response => {
+      this.props.setUserProfile(response.data)
+    })
   }
   render = () => {
     return <Profile {...this.props} profile={this.props.profile}/>;
