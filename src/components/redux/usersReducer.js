@@ -4,11 +4,12 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const TOOGLE_ISFETCHING = 'TOOGLE_ISFETCHING';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 
 const initState = {
     users: [],
-    pageSize: 6,
-    totalUsersCount: 12,
+    pageSize: 20,
+    totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
 }
@@ -35,25 +36,28 @@ const usersReducer = (state = initState, action) => {
             })
         }
     } else if (action.type === SET_USERS) {
-        return {...state, users: [...action.users]}
-    } else if ((action.type === SET_CURRENT_PAGE)) {
+        return {...state, users: [...action.users], ...state.totalUsersCount}
+    } else if (action.type === SET_CURRENT_PAGE) {
         return {...state, currentPage: action.currentPage}
     } else if (action.type === TOOGLE_ISFETCHING) {
         return {
             ...state,
             isFetching: action.isFetching,
         }
+    } else if (action.type === SET_TOTAL_USERS_COUNT) {
+        return {...state, totalUsersCount: action.totalCount}
     } else {
         return state
     }
 }
 
-export const getUsers = (currentPage) => {
+export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
       dispatch(toogleIsFetching(true));
-      userAPI.getUsers(currentPage).then((response) => {
+      userAPI.getUsers(currentPage, pageSize).then((response) => {
         dispatch(toogleIsFetching(false));
-        dispatch(setUsers(response.data));
+        dispatch(setUsers(response.items));
+        dispatch(setTotalUsersCount(response.totalCount))
       });
     };
 }
@@ -63,5 +67,6 @@ export const unfollow = (userId) => {return {type: UNFOLLOW, userId}};
 export const setUsers = (users) => {return {type: SET_USERS, users}};
 export const setCurrentPage = (currentPage) => {return {type: SET_CURRENT_PAGE, currentPage}};
 export const toogleIsFetching = (isFetching) => {return {type: TOOGLE_ISFETCHING, isFetching}};
+export const setTotalUsersCount = (totalCount) => {return {type:SET_TOTAL_USERS_COUNT, totalCount}} 
 
 export default usersReducer;

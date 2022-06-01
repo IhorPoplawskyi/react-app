@@ -1,13 +1,13 @@
 import React from "react";
 import Users from "./Users";
 import { connect } from "react-redux";
-import {follow, unfollow, setCurrentPage, getUsers} from './../redux/usersReducer';
+import {follow, unfollow, setCurrentPage, getUsers, } from './../redux/usersReducer';
 import Preloader from "../common/Preloader/Preloader";
 
 class UsersAPIComponent extends React.Component {
   componentDidMount() {
     if (this.props.users.length === 0) {
-      this.props.getUsers(this.props.currentPage);
+      this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
   }
   onPageChanged = (pageNumber) => {

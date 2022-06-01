@@ -7,4 +7,9 @@
 .selectedPage {
     font-weight: bold;
     color: antiquewhite;
+    padding-left: 5px;
+}
+
+.pagesCount {
+    padding-left: 5px;
 }
