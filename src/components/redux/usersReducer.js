@@ -5,6 +5,7 @@ const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const TOOGLE_ISFETCHING = 'TOOGLE_ISFETCHING';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+const TOOGLE_IN_PROGRESS = 'TOOGLE_IN_PROGRESS';
 
 const initState = {
     users: [],
@@ -12,6 +13,7 @@ const initState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
+    inProgress: [],
 }
 
 const usersReducer = (state = initState, action) => {
@@ -46,6 +48,10 @@ const usersReducer = (state = initState, action) => {
         }
     } else if (action.type === SET_TOTAL_USERS_COUNT) {
         return {...state, totalUsersCount: action.totalCount}
+    } else  if (action.type === TOOGLE_IN_PROGRESS) {
+        return {...state, inProgress: action.inProgress ? 
+            [...state.inProgress, action.user] : 
+            state.inProgress.filter(el => el != action.user)}
     } else {
         return state
     }
@@ -62,6 +68,7 @@ export const getUsers = (currentPage, pageSize) => {
     };
 }
 
+export const toogleInProgress = (inProgress, user) => {return {type: TOOGLE_IN_PROGRESS, inProgress, user}}
 export const follow = (userId) => {return {type: FOLLOW, userId}};
 export const unfollow = (userId) => {return {type: UNFOLLOW, userId}};
 export const setUsers = (users) => {return {type: SET_USERS, users}};
