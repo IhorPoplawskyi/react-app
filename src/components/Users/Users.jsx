@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import classes from './Users.module.css';
@@ -29,41 +28,12 @@ let Users = (props) => {
                     <div>
                         {user.followed ? 
                         <button disabled={props.inProgress.some(el => el === user.id)} onClick={() => {
-                            props.toogleInProgress(true, user.id);
-                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                            {
-                                withCredentials: true,
-                                headers: {'API-KEY' : 'e2c3b74f-5822-49ff-8ad1-b2c4ddfc80a9'}
-                            })
-                            .then(response => {
-                                if (response.data.resultCode === 0) {
-                                    props.unfollow(user.id);
-                                }
-                                props.toogleInProgress(false, user.id);
-                            })
-                        }}>Unfollow</button> : 
+                            props.follow(user.id)}}>Unfollow</button> : 
                         <button disabled={props.inProgress.some(el => el === user.id)} onClick={() => {
-                            props.toogleInProgress(true, user.id);
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                            {}, 
-                            {
-                                withCredentials: true,
-                                headers: {'API-KEY' : 'e2c3b74f-5822-49ff-8ad1-b2c4ddfc80a9'}
-                            })
-                            .then(response => {
-                                if (response.data.resultCode === 0) {
-                                    props.follow(user.id);
-                                }
-                                props.toogleInProgress(false, user.id)
-                            })
-                        }}>Follow</button>}
+                            props.unfollow(user.id)}}>Follow</button>}
                     </div>
                 </span>
-                <span>
-                    <span>
-                        <div>{user.name}</div>
-                    </span>
-                 </span>
+                    <div>{user.name}</div>
             </div>)}
         </div>
     )

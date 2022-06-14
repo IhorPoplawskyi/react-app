@@ -68,9 +68,33 @@ export const getUsers = (currentPage, pageSize) => {
     };
 }
 
+export const follow = (user) => {
+  return (dispatch) => {
+    dispatch(toogleInProgress(true, user));
+    userAPI.follow(user).then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(unfollowSuccess(user));
+      }
+      dispatch(toogleInProgress(false, user));
+    });
+  };
+};
+
+export const unfollow = (user) => {
+  return (dispatch) => {
+    dispatch(toogleInProgress(true, user));
+    userAPI.unfollow(user).then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(followSuccess(user));
+      }
+      dispatch(toogleInProgress(false, user));
+    });
+  };
+};
+
 export const toogleInProgress = (inProgress, user) => {return {type: TOOGLE_IN_PROGRESS, inProgress, user}}
-export const follow = (userId) => {return {type: FOLLOW, userId}};
-export const unfollow = (userId) => {return {type: UNFOLLOW, userId}};
+export const followSuccess = (userId) => {return {type: FOLLOW, userId}};
+export const unfollowSuccess = (userId) => {return {type: UNFOLLOW, userId}};
 export const setUsers = (users) => {return {type: SET_USERS, users}};
 export const setCurrentPage = (currentPage) => {return {type: SET_CURRENT_PAGE, currentPage}};
 export const toogleIsFetching = (isFetching) => {return {type: TOOGLE_ISFETCHING, isFetching}};
