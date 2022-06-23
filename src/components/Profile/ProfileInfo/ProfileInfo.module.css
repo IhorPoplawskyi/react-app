@@ -6,3 +6,9 @@
   max-width: 150px;
   border-radius: 50%;
 }
+
+.nameBlock {
+  font-weight: 700;
+  color: white;
+  font-size: 21px;
+}
