@@ -1,0 +1,11 @@
+.ErrorInput input {
+    border: 2px solid red;
+}
+
+.ErrorText span {
+    color: red;
+}
+
+.formControl {
+    color: black;
+}
