@@ -5,6 +5,7 @@ import {follow, unfollow, setCurrentPage, getUsers, toogleInProgress} from './..
 import Preloader from "../common/Preloader/Preloader";
 import { WithAuthRedirect } from "../hoc/WithAuthRedirect";
 import { compose } from "redux";
+import { pageSizeSelector, getUsersSelector, totalUsersCountSelector, currentPageSelector, isFetchingSelector, inProgressSelector } from "../redux/users-selectors";
 
 class UsersAPIComponent extends React.Component {
   componentDidMount() {
@@ -38,12 +39,12 @@ class UsersAPIComponent extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-      users: state.usersPage.users,
-      pageSize: state.usersPage.pageSize,
-      totalUsersCount: state.usersPage.totalUsersCount,
-      currentPage: state.usersPage.currentPage,
-      isFetching: state.usersPage.isFetching,
-      inProgress: state.usersPage.inProgress,
+      users: getUsersSelector(state),
+      pageSize: pageSizeSelector(state),
+      totalUsersCount: totalUsersCountSelector(state),
+      currentPage: currentPageSelector(state),
+      isFetching: isFetchingSelector(state),
+      inProgress: inProgressSelector(state),
     }
   }
   
